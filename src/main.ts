@@ -77,10 +77,10 @@ const marginBottom = 10;
 const marginLeft = 50;
 
 function drawChart() {
-  const width = window.innerWidth;
-  const height = window.innerHeight - 50;
-
-  // Update the overall size of the SVG
+  // Resize the SVG to fill the entire chart container (which is using flexbox
+  // to dynamically fill the main section of the page)
+  const width = chartContainer.clientWidth;
+  const height = chartContainer.clientHeight;
   svg
     .attr("width", width)
     .attr("height", height);
@@ -119,11 +119,15 @@ function drawChart() {
     .call(d3.axisLeft(y).tickFormat(y => valueFormatter.format(y.valueOf())));
 }
 
+const chartContainer = document.createElement("div");
+chartContainer.id = "chart-container";
+chartContainer.append(svg.node()!);
+
+document
+  .querySelector<HTMLDivElement>("#app")!
+  .append(increaseButtons, chartContainer, decreaseButtons);
+
 // Initialize the chart immediately and redraw when the window is resized
 drawChart();
 screen.orientation.addEventListener("change", drawChart);
 window.addEventListener("resize", drawChart);
-
-document
-  .querySelector<HTMLDivElement>("#app")!
-  .append(increaseButtons, svg.node()!, decreaseButtons);
