@@ -121,6 +121,7 @@ function drawChart() {
 
 // Initialize the chart immediately and redraw when the window is resized
 drawChart();
+screen.orientation.addEventListener("change", drawChart);
 window.addEventListener("resize", drawChart);
 
 document
