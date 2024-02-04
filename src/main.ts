@@ -31,7 +31,7 @@ const increaseButtons = document.createElement("div");
 increaseButtons.className = "buttons";
 for (let d of groups) {
   let btn = document.createElement("button");
-  btn.innerText = "INC";
+  btn.innerText = "\u2b06\ufe0f"; // Up Arrow Emoji
   btn.onclick = () => {
     d.value += 1000;
     drawChart();
@@ -45,7 +45,7 @@ const decreaseButtons = document.createElement("div");
 decreaseButtons.className = "buttons";
 for (let d of groups) {
   let btn = document.createElement("button");
-  btn.innerText = "DEC";
+  btn.innerText = "\u2b07\ufe0f"; // Down Arrow Emoji
   btn.onclick = () => {
     d.value = Math.max(d.value - 1000, 0);
     drawChart();
