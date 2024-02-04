@@ -1,0 +1,27 @@
+:root {
+  font-family: sans-serif;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-left: 50px;
+}
+
+svg {
+  .bar-texts {
+    font-size: 10px;
+  }
+}
+
+@media print {
+  .buttons {
+    display: none;
+  }
+}
