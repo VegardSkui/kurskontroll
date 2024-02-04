@@ -1,48 +1,28 @@
 import "./style.css";
 import * as d3 from "d3";
+import initialGroups from "./groups.json";
 
-const groups = [
-  {
-    color: "#57b7e9",
-    value: 3000,
-  },
-  {
-    color: "#f3d3e5",
-    value: 4000,
-  },
-  {
-    color: "#a1c145",
-    value: 5000,
-  },
-  {
-    color: "#d2d0cf",
-    value: 6000,
-  },
-  {
-    color: "#fdf491",
-    value: 7000,
-  },
-  {
-    color: "#e38db3",
-    value: 8000,
-  },
-  {
-    color: "#efc7b5",
-    value: 9000,
-  },
-  {
-    color: "#fae64d",
-    value: 10000,
-  },
-  {
-    color: "#b1d3b7",
-    value: 11000,
-  },
-  {
-    color: "#e6a037",
-    value: 12000,
-  },
-];
+type Group = {
+  color: string;
+  value: number;
+};
+
+/** Load persisted groups from `localStorage`. */
+function loadGroups(): Group[] | null {
+  try {
+    return JSON.parse(localStorage.getItem("groups") || "null")
+  } catch {
+    return null;
+  }
+}
+
+/** Save groups to `localStorage`. */
+function saveGroups(groups: Group[]): void {
+  localStorage.setItem("groups", JSON.stringify(groups));
+}
+
+// Load previously saved groups or default to initial values
+const groups: Group[] = loadGroups() || initialGroups;
 
 const valueFormatter = Intl.NumberFormat("no");
 
@@ -55,6 +35,7 @@ for (let d of groups) {
   btn.onclick = () => {
     d.value += 1000;
     drawChart();
+    saveGroups(groups);
   };
   increaseButtons.append(btn);
 }
@@ -68,6 +49,7 @@ for (let d of groups) {
   btn.onclick = () => {
     d.value = Math.max(d.value - 1000, 0);
     drawChart();
+    saveGroups(groups);
   };
   decreaseButtons.append(btn);
 }
