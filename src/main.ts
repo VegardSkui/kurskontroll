@@ -127,7 +127,7 @@ document
   .querySelector<HTMLDivElement>("#app")!
   .append(increaseButtons, chartContainer, decreaseButtons);
 
-// Initialize the chart immediately and redraw when the window is resized
-drawChart();
+// (Re)draw the chart when the window is shown or resized
 screen.orientation.addEventListener("change", drawChart);
+window.addEventListener("pageshow", drawChart);
 window.addEventListener("resize", drawChart);
