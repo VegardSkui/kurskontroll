@@ -1,6 +1,8 @@
 :root {
   font-family: sans-serif;
   overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 #app-container {
