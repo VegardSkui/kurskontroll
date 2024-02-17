@@ -25,6 +25,10 @@ function saveGroups(groups: Group[]): void {
 const groups: Group[] = loadGroups() || initialGroups;
 
 const valueFormatter = Intl.NumberFormat("no");
+function formatValue(n: number): string {
+  if (n === 0) return "0";
+  return valueFormatter.format(n / 1000) + "'";
+}
 
 // Build buttons to increase values
 const increaseButtons = document.createElement("div");
@@ -108,7 +112,7 @@ function drawChart() {
     .attr("x", d => x(d.color)! + x.bandwidth() / 2)
     .attr("y", d => y(d.value) - 4)
     .attr("text-anchor", "middle")
-    .text(d => valueFormatter.format(d.value));
+    .text(d => formatValue(d.value));
 
   // Update the x- and y-axes
   xAxis
@@ -116,7 +120,7 @@ function drawChart() {
     .call(d3.axisBottom(x).tickFormat(_x => "").tickSizeOuter(0));
   yAxis
     .attr("transform", `translate(${marginLeft}, 0)`)
-    .call(d3.axisLeft(y).tickFormat(y => valueFormatter.format(y.valueOf())));
+    .call(d3.axisLeft(y).tickFormat(y => formatValue(y.valueOf())));
 }
 
 const chartContainer = document.createElement("div");

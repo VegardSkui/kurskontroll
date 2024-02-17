@@ -44,10 +44,8 @@
   }
 }
 
-svg {
-  .bar-texts {
-    font-size: 10px;
-  }
+svg .bar-texts {
+  font-size: 18px;
 }
 
 @media print {
